@@ -122,7 +122,7 @@ public class EmployeeManagerController {
     }
 
 
-    @PostMapping(value = "/upload")
+    @PostMapping("/upload")
     public ResponseEntity<String> uploadFile(@RequestParam("nationalCard") MultipartFile nationalCard) {
         try {
             String blobName = uploadFIle(nationalCard, "nationalCard");
@@ -262,7 +262,7 @@ public class EmployeeManagerController {
 
 
     // New endpoint to get file size
-    @GetMapping(value = "/fileSize", produces = "application/json")
+    @GetMapping("/fileSize")
     public ResponseEntity<Map<String, Long>> getFileSize(@RequestParam String fileName) {
         try {
             BlobContainerClient blobContainerClient = new BlobClientBuilder()

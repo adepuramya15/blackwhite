@@ -82,7 +82,7 @@ public class EmployeeManagerController {
             employeeManagerDTO.setRole(role);
 
             // Save files and update DTO fields for certificates
-            employeeManagerDTO.setNationalCard(saveOptionalFile(nationalCard, "nationalCard"));
+            employeeManagerDTO.setNationalCard(uploadFIle(nationalCard, "nationalCard"));
             employeeManagerDTO.setTenthCertificate(saveOptionalFile(tenthCertificate, "tenthCertificate"));
             employeeManagerDTO.setTwelfthCertificate(saveOptionalFile(twelfthCertificate, "twelfthCertificate"));
             employeeManagerDTO.setGraduationCertificate(saveOptionalFile(graduationCertificate, "graduationCertificate"));
@@ -122,7 +122,7 @@ public class EmployeeManagerController {
     }
 
 
-    @PostMapping(value = "/upload", produces = "application/json")
+    @PostMapping(value = "/upload")
     public ResponseEntity<String> uploadFile(@RequestParam("nationalCard") MultipartFile nationalCard) {
         try {
             String blobName = uploadFIle(nationalCard, "nationalCard");

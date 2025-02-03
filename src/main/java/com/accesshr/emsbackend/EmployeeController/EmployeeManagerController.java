@@ -213,37 +213,6 @@ public class EmployeeManagerController {
         }
     }
 
-    // Fetch a specific employee by ID
-    @GetMapping(value = "/employees/{employeeId}", produces = "application/json")
-    public ResponseEntity<?> getEmployeesById(@PathVariable("employeeId") String  employeeId) {
-        try {
-            EmployeeManagerDTO employee = employeeManagerService.getEmployeeDataById(employeeId);
-            if (employee != null) {
-                return ResponseEntity.ok(employee);
-            } else {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Employee not found");
-            }
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to fetch employee: " + e.getMessage());
-        }
-    }
-
-    // Delete an employee by ID
-//    @DeleteMapping("/employees/{id}")
-//    public ResponseEntity<String> deleteEmployee(@PathVariable("employeeId") int employeeId) {
-//        try {
-//            boolean isDeleted = employeeManagerService.deleteEmployeeById(employeeId);
-//            if (isDeleted) {
-//                return ResponseEntity.ok("Employee deleted successfully");
-//            } else {
-//                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Employee not found");
-//            }
-//        } catch (Exception e) {
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to delete employee: " + e.getMessage());
-//        }
-//    }
-
-
     @DeleteMapping(value = "/employees/{id}", produces = "application/json")
     public ResponseEntity<String> deleteEmployee(@PathVariable("id") int id) {
         try {

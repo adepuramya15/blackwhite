@@ -201,16 +201,23 @@ public class EmployeeManagerController {
     }
 
 
-    // Fetch all employees
-    @GetMapping(value = "/employees", produces = "application/json")
-    public ResponseEntity<?> getAllEmployees() {
+
+    @DeleteMapping(value = "/employees/{id}", produces = "application/json")
+    public ResponseEntity<String> deleteEmployee(@PathVariable("id") int id) {
         try {
-            List<EmployeeManagerDTO> employees = employeeManagerService.getAllEmployees();
-            return ResponseEntity.ok(employees);
+            boolean isDeleted = employeeManagerService.deleteById(id);
+            if (isDeleted) {
+                return ResponseEntity.ok("Employee deleted successfully");
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Employee not found");
+            }
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to fetch employees: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to delete employee: " + e.getMessage());
         }
     }
+
 
     // New endpoint to get file size
     @GetMapping("/fileSize")
